@@ -1,5 +1,5 @@
 {
-    "name": "cordova-ios",
+    "name": "cordova-ios-previewer",
     "version": "3.9.2",
     "description": "cdv-siberian-ios",
     "main": "bin/create",
