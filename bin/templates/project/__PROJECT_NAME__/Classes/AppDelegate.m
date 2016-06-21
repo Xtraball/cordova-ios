@@ -52,6 +52,9 @@
 #endif
     [NSURLCache setSharedURLCache:sharedCache];
 
+    // Prepare the cache
+    [NSURLProtocol registerClass:[RNCachingURLProtocol class]];
+
     self = [super init];
     return self;
 }
@@ -63,6 +66,9 @@
  */
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
+    NSDictionary *previewerInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Previewer"];
+    if(!previewerInfo) {
+
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
 
 #if __has_feature(objc_arc)
@@ -87,6 +93,7 @@
 
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    }
 
     return YES;
 }

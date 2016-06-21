@@ -28,8 +28,15 @@
 #import <Cordova/CDVViewController.h>
 #import <Cordova/CDVCommandDelegateImpl.h>
 #import <Cordova/CDVCommandQueue.h>
+#import "CDVOfflineMode.h"
 
-@interface MainViewController : CDVViewController
+@interface MainViewController : CDVViewController <UIGestureRecognizerDelegate>
+
+@property (strong, nonatomic) NSDictionary *previewerInfo;
+@property (strong, nonatomic) NSString *previewerAppDomain;
+@property (strong, nonatomic) NSString *previewerAppKey;
+
+@property (weak, nonatomic) IBOutlet UITextView *webViewInfo;
 
 @end
 
