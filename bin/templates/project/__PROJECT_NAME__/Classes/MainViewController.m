@@ -27,7 +27,7 @@
 
 #import "MainViewController.h"
 //import remoteControls AppsMobileCompany
-#import "RemoteControls.h"
+//#import "RemoteControls.h"
 
 @implementation MainViewController
 
