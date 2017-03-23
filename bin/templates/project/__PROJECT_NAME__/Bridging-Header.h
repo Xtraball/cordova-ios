@@ -26,3 +26,6 @@
 //
 
 #import <Cordova/CDV.h>
+
+// plugin iosrtc
+#import "cordova-plugin-iosrtc-Bridging-Header.h"
