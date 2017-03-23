@@ -43,12 +43,28 @@
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
     <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="SuppressesLongPressGesture" value="true" />
+    <preference name="Suppresses3DTouchGesture" value="false" />
     <preference name="GapBetweenPages" value="0" />
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" /> <!-- page, column -->
     <preference name="PaginationMode" value="unpaginated" /> <!-- unpaginated, leftToRight, topToBottom, bottomToTop, rightToLeft -->
-
+    <!-- This settings is just used by the CDVViewControllerTest to assert which config file has been loaded -->
+    <preference name="test_CDVConfigFile" value="config.xml" />
+    
     <feature name="LocalStorage">
         <param name="ios-package" value="CDVLocalStorage"/>
+    </feature>
+    <feature name="HandleOpenUrl">
+        <param name="ios-package" value="CDVHandleOpenURL"/>
+        <param name="onload" value="true"/>
+    </feature>
+    <feature name="IntentAndNavigationFilter">
+        <param name="ios-package" value="CDVIntentAndNavigationFilter"/>
+        <param name="onload" value="true"/>
+    </feature>
+    <feature name="GestureHandler">
+        <param name="ios-package" value="CDVGestureHandler"/>
+        <param name="onload" value="true"/>
     </feature>
 </widget>
