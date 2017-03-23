@@ -2,6 +2,7 @@
 .*.sw?
 .vscode
 *.cso
+.idea
 tmp
 *.mode1v3
 *.pbxuser
