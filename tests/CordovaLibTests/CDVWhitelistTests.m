@@ -20,6 +20,7 @@
 #import <XCTest/XCTest.h>
 
 #import <Cordova/CDVWhitelist.h>
+#import "CDVIntentAndNavigationFilter.h"
 
 @interface CDVWhitelistTests : XCTestCase
 @end
@@ -82,6 +83,19 @@
     XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"ftp://MyDangerousSite.org"]]);
     XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"ftps://apache.org.SuspiciousSite.com"]]);
     XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"gopher://apache.org"]]);
+}
+
+- (void)testURISchemesNotFollowedByDoubleSlashes
+{
+    NSArray* allowedHosts = [NSArray arrayWithObjects:
+                             @"tel:*",
+                             @"sms:*",
+                             nil];
+    
+    CDVWhitelist* whitelist = [[CDVWhitelist alloc] initWithArray:allowedHosts];
+    
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"tel:1234567890"]]);
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"sms:1234567890"]]);
 }
 
 - (void)testCatchallWildcardByProto
@@ -228,19 +242,30 @@
     XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"https://cordova.apache.org"]]);
 }
 
-- (void)testWildcardPlusScheme
+- (void)testWildcardScheme
 {
     NSArray* allowedHosts = [NSArray arrayWithObjects:
-        @"http://*.apache.org",
+        @"*://*.test.com",
         nil];
 
     CDVWhitelist* whitelist = [[CDVWhitelist alloc] initWithArray:allowedHosts];
 
-    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://www.apache.org"]]);
-    XCTAssertFalse([whitelist URLIsAllowed:[NSURL URLWithString:@"https://www.google.com"]]);
-    XCTAssertFalse([whitelist URLIsAllowed:[NSURL URLWithString:@"ftp://cordova.apache.org"]]);
-    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://cordova.apache.org"]]);
-    XCTAssertFalse([whitelist URLIsAllowed:[NSURL URLWithString:@"https://cordova.apache.org"]]);
+    XCTAssertFalse([whitelist URLIsAllowed:[NSURL URLWithString:@"http://apache.org"]]);
+    XCTAssertFalse([whitelist URLIsAllowed:[NSURL URLWithString:@"gopher://testtt.com"]]);
+    
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"gopher://test.com"]]);
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://test.com"]]);
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://my.test.com"]]);
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"https://test.com"]]);
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"https://my.test.com"]]);
+
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://test.com/my/path"]]);
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://my.test.com/my/path"]]);
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"https://test.com/my/path"]]);
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"https://my.test.com/my/path"]]);
+
+    XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"gopher://test.com#foo"]]);
+    XCTAssertFalse([whitelist URLIsAllowed:[NSURL URLWithString:@"#foo"]]);
 }
 
 - (void)testCredentials
@@ -255,5 +280,53 @@
     XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://user:pass@www.apache.org"]]);
     XCTAssertTrue([whitelist URLIsAllowed:[NSURL URLWithString:@"http://user:pass@www.google.com"]]);
 }
+
+- (void)testAllowIntentsAndNavigations
+{
+    NSArray* allowIntents = @[ @"https://*" ];
+    NSArray* allowNavigations = @[ @"https://*.apache.org" ];
+    
+    CDVWhitelist* intentsWhitelist = [[CDVWhitelist alloc] initWithArray:allowIntents];
+    CDVWhitelist* navigationsWhitelist = [[CDVWhitelist alloc] initWithArray:allowNavigations];
+    
+    // Test allow-navigation superceding allow-intent
+    XCTAssertEqual([CDVIntentAndNavigationFilter filterUrl:[NSURL URLWithString:@"https://apache.org/foo.html"] intentsWhitelist:intentsWhitelist navigationsWhitelist:navigationsWhitelist], CDVIntentAndNavigationFilterValueNavigationAllowed);
+    // Test wildcard https as allow-intent
+    XCTAssertEqual([CDVIntentAndNavigationFilter filterUrl:[NSURL URLWithString:@"https://google.com"] intentsWhitelist:intentsWhitelist navigationsWhitelist:navigationsWhitelist], CDVIntentAndNavigationFilterValueIntentAllowed);
+    // Test http (not allowed in either)
+    XCTAssertEqual([CDVIntentAndNavigationFilter filterUrl:[NSURL URLWithString:@"http://google.com"] intentsWhitelist:intentsWhitelist navigationsWhitelist:navigationsWhitelist], CDVIntentAndNavigationFilterValueNoneAllowed);
+    
+    
+    NSURL* telUrl = [NSURL URLWithString:@"tel:5555555"];
+    NSMutableURLRequest* telRequest = [NSMutableURLRequest requestWithURL:telUrl];
+    telRequest.mainDocumentURL = telUrl;
+    
+    // mainDocumentURL and URL are the same in the NSURLRequest
+    // Only UIWebViewNavigationTypeLinkClicked and UIWebViewNavigationTypeOther should return YES
+    XCTAssertTrue([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeLinkClicked]);
+    XCTAssertTrue([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeOther]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeReload]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeBackForward]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeFormSubmitted]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeFormResubmitted]);
+    
+    telRequest.mainDocumentURL = nil;
+    // mainDocumentURL and URL are not the same in the NSURLRequest
+    // Only UIWebViewNavigationTypeLinkClicked should return YES
+    XCTAssertTrue([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeLinkClicked]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeOther]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeReload]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeBackForward]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeFormSubmitted]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOpenURLRequest:telRequest navigationType:UIWebViewNavigationTypeFormResubmitted]);
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://apache.org"]];
+    // Only CDVIntentAndNavigationFilterValueNavigationAllowed should return YES
+    // navigationType doesn't matter
+    XCTAssertTrue([CDVIntentAndNavigationFilter shouldOverrideLoadWithRequest:request navigationType:UIWebViewNavigationTypeOther filterValue:CDVIntentAndNavigationFilterValueNavigationAllowed]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOverrideLoadWithRequest:request navigationType:UIWebViewNavigationTypeOther filterValue:CDVIntentAndNavigationFilterValueIntentAllowed]);
+    XCTAssertFalse([CDVIntentAndNavigationFilter shouldOverrideLoadWithRequest:request navigationType:UIWebViewNavigationTypeOther filterValue:CDVIntentAndNavigationFilterValueNoneAllowed]);
+}
+
 
 @end

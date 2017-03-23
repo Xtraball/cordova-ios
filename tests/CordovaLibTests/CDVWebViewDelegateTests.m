@@ -19,9 +19,9 @@
 
 #import <XCTest/XCTest.h>
 
-#import <Cordova/CDVWebViewDelegate.h>
+#import <Cordova/CDVUIWebViewDelegate.h>
 
-@interface CDVWebViewDelegate2 : CDVWebViewDelegate {}
+@interface CDVWebViewDelegate2 : CDVUIWebViewDelegate {}
 
 - (void)setState:(NSInteger)state;
 - (NSInteger)state;
@@ -42,7 +42,7 @@
 
 @end
 
-@interface CDVWebViewDelegate ()
+@interface CDVUIWebViewDelegate ()
 
 // expose private interface
 - (BOOL)shouldLoadRequest:(NSURLRequest*)request;
@@ -80,16 +80,22 @@
 
 - (void)testShouldLoadRequest
 {
-    CDVWebViewDelegate* wvd = [[CDVWebViewDelegate alloc] initWithDelegate:nil]; // not really testing delegate handling
+    CDVUIWebViewDelegate* wvd = [[CDVUIWebViewDelegate alloc] initWithDelegate:nil]; // not really testing delegate handling
 
     NSURLRequest* mailtoUrl = [NSURLRequest requestWithURL:[NSURL URLWithString:@"mailto:dev@cordova.apache.org"]];
     NSURLRequest* telUrl = [NSURLRequest requestWithURL:[NSURL URLWithString:@"tel:12345"]];
     NSURLRequest* plainUrl = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://apache.org"]];
+    NSURLRequest* dataUrl = [NSURLRequest requestWithURL:[NSURL URLWithString:@"data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="]];
+    NSURLRequest* blobUrl = [NSURLRequest requestWithURL:[NSURL URLWithString:@"blob:d3958f5c-0777-0845-9dcf-2cb28783acaf"]];
+
 
     XCTAssertTrue([wvd shouldLoadRequest:mailtoUrl], @"mailto urls should be allowed");
     XCTAssertTrue([wvd shouldLoadRequest:telUrl], @"tel urls should be allowed");
     // as long as this is in the whitelist it should pass
     XCTAssertTrue([wvd shouldLoadRequest:plainUrl], @"http urls should be allowed");
+
+    XCTAssertTrue([wvd shouldLoadRequest:dataUrl], @"data urls should be allowed");
+    XCTAssertTrue([wvd shouldLoadRequest:blobUrl], @"blob urls should be allowed");
 }
 
 - (void)testFragmentIdentifiersWithHttpUrl
@@ -109,7 +115,7 @@
 
 - (void)doTestFragmentIdentifiersWithBaseUrl:(NSString*)baseUrl fragment:(NSString*)fragment
 {
-    CDVWebViewDelegate* wvd = [[CDVWebViewDelegate alloc] initWithDelegate:nil]; // not really testing delegate handling
+    CDVUIWebViewDelegate* wvd = [[CDVUIWebViewDelegate alloc] initWithDelegate:nil]; // not really testing delegate handling
 
     NSString* originalUrlString = baseUrl;
     NSURL* originalUrl = [NSURL URLWithString:originalUrlString];
