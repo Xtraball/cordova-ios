@@ -21,7 +21,7 @@
 #import <XCTest/XCTest.h>
 
 #import <Cordova/CDVPluginResult.h>
-#import <Cordova/CDVJSON.h>
+#import "CDVJSON_private.h"
 
 @interface CDVPluginResultJSONSerializationTests : XCTestCase
 @end
@@ -33,7 +33,23 @@
     int val = 5;
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:val];
 
-    XCTAssertTrue([[NSNumber numberWithInt:val] isEqual:[[result argumentsAsJSON] JSONFragment]]);
+    XCTAssertTrue([[NSNumber numberWithInt:val] isEqual:[[result argumentsAsJSON] cdv_JSONFragment]]);
+}
+
+- (void)testSerializingMessageAsNSNumber
+{
+    NSInteger val = 5;
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsNSInteger:val];
+
+    XCTAssertTrue([[NSNumber numberWithInteger:val] isEqual:[[result argumentsAsJSON] cdv_JSONFragment]]);
+}
+
+- (void)testSerializingMessageAsNSUNumber
+{
+    NSUInteger val = 5;
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsNSUInteger:val];
+
+    XCTAssertTrue([[NSNumber numberWithUnsignedInteger:val] isEqual:[[result argumentsAsJSON] cdv_JSONFragment]]);
 }
 
 - (void)testSerializingMessageAsDouble
@@ -41,7 +57,7 @@
     double val = 5.5;
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDouble:val];
 
-    XCTAssertTrue([[NSNumber numberWithDouble:val] isEqual:[[result argumentsAsJSON] JSONFragment]]);
+    XCTAssertTrue([[NSNumber numberWithDouble:val] isEqual:[[result argumentsAsJSON] cdv_JSONFragment]]);
 }
 
 - (void)testSerializingMessageAsBool
@@ -49,7 +65,7 @@
     BOOL val = YES;
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:val];
 
-    XCTAssertTrue([[NSNumber numberWithBool:val] isEqual:[[result argumentsAsJSON] JSONFragment]]);
+    XCTAssertTrue([[NSNumber numberWithBool:val] isEqual:[[result argumentsAsJSON] cdv_JSONFragment]]);
 }
 
 - (void)testSerializingMessageAsArray
@@ -63,7 +79,7 @@
         nil];
 
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:testValues];
-    NSArray* arr = [[result argumentsAsJSON] JSONObject];
+    NSArray* arr = [[result argumentsAsJSON] cdv_JSONObject];
 
     XCTAssertTrue([arr isKindOfClass:[NSArray class]]);
     XCTAssertTrue([testValues count] == [arr count]);
@@ -109,7 +125,7 @@
     [testValues setValue:nestedDict forKey:@"nestedDict"];
 
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:testValues];
-    NSDictionary* dic = [[result argumentsAsJSON] JSONObject];
+    NSDictionary* dic = [[result argumentsAsJSON] cdv_JSONObject];
 
     [self __testDictionary:testValues withDictionary:dic];
 }
@@ -122,7 +138,7 @@
 
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageToErrorObject:1];
 
-    [self __testDictionary:testValues withDictionary:[[result argumentsAsJSON] JSONObject]];
+    [self __testDictionary:testValues withDictionary:[[result argumentsAsJSON] cdv_JSONObject]];
 }
 
 - (void)testSerializingMessageAsStringContainingQuotes
@@ -130,7 +146,7 @@
     NSString* quotedString = @"\"quoted\"";
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:quotedString];
 
-    XCTAssertTrue([quotedString isEqualToString:[[result argumentsAsJSON] JSONFragment]]);
+    XCTAssertTrue([quotedString isEqualToString:[[result argumentsAsJSON] cdv_JSONFragment]]);
 }
 
 - (void)testSerializingMessageAsStringThatIsNil
@@ -138,7 +154,7 @@
     NSString* nilString = nil;
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nilString];
 
-    XCTAssertTrue([[NSNull null] isEqual:[[result argumentsAsJSON] JSONFragment]]);
+    XCTAssertTrue([[NSNull null] isEqual:[[result argumentsAsJSON] cdv_JSONFragment]]);
 }
 
 @end
