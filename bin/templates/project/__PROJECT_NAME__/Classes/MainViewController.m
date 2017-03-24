@@ -19,13 +19,14 @@
 
 //
 //  MainViewController.h
-//  __PROJECT_NAME__
+//  AppsMobileCompany
 //
 //  Created by ___FULLUSERNAME___ on ___DATE___.
 //  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
 //
 
 #import "MainViewController.h"
+#import "CDVCommon.h"
 
 @implementation MainViewController
 
@@ -40,6 +41,7 @@
         // Uncomment to override the CDVCommandQueue used
         // _commandQueue = [[MainCommandQueue alloc] initWithViewController:self];
     }
+
     return self;
 }
 
@@ -48,10 +50,11 @@
     self = [super init];
     if (self) {
         // Uncomment to override the CDVCommandDelegateImpl used
-        // _commandDelegate = [[MainCommandDelegate alloc] initWithViewController:self];
+        //_commandDelegate = [[MainCommandDelegate alloc] initWithViewController:self];
         // Uncomment to override the CDVCommandQueue used
         // _commandQueue = [[MainCommandQueue alloc] initWithViewController:self];
     }
+
     return self;
 }
 
@@ -70,8 +73,40 @@
     // View defaults to full size.  If you want to customize the view's size, or its subviews (e.g. webView),
     // you can do so here.
 
+    previewerInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Previewer"];
+
     if(previewerInfo) {
         [self.navigationController setNavigationBarHidden:YES];
+
+        NSNotificationCenter *notifyCenter = [NSNotificationCenter defaultCenter];
+        [notifyCenter addObserverForName:@"CDVwebViewDidStartLoad"
+                                  object:nil
+                                   queue:nil
+                              usingBlock:^(NSNotification *notification){
+                                  // Explore notification
+                                  NSLog(@"Notification found with:"
+                                        "\r\n     name:     %@"
+                                        "\r\n     object:   %@"
+                                        "\r\n     userInfo: %@",
+                                        [notification name],
+                                        [notification object],
+                                        [notification userInfo]);
+
+                                  UIWebView *theWebView = [notification object];
+
+                                  if(previewerInfo && ![previewerAppDomain isEqualToString:@""] && ![previewerAppKey isEqualToString:@""]) {
+                                      NSLog(@"previewerAppDomain: %@", previewerAppDomain);
+                                      NSLog(@"previewerAppKey: %@", previewerAppKey);
+
+                                      NSString *jsSetIdentifier = [[NSString alloc] initWithFormat:@"DOMAIN = '%@'; APP_KEY = '%@'; var BASE_PATH = '/' + APP_KEY;", previewerAppDomain, previewerAppKey];
+
+                                      [theWebView stringByEvaluatingJavaScriptFromString:jsSetIdentifier];
+
+                                      previewerAppDomain = @"";
+                                      previewerAppKey = @"";
+                                  }
+                              }];
+
     }
 
     [super viewWillAppear:animated];
@@ -80,10 +115,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    // Do any additional setup after loading the view from its nib.
-    [[RemoteControls remoteControls] setWebView:self.webView];
 
     previewerInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Previewer"];
 
@@ -104,6 +135,7 @@
         tap.delegate = self;
 
         [self.webView addGestureRecognizer:tap];
+
     }
 }
 
@@ -114,74 +146,6 @@
     // e.g. self.myOutlet = nil;
 }
 
-/* Comment out the block below to over-ride */
-
-/*
-- (UIWebView*) newCordovaViewWithFrame:(CGRect)bounds
-{
-    return[super newCordovaViewWithFrame:bounds];
-}
-
-#pragma mark UIWebDelegate implementation
-
-- (void)webViewDidFinishLoad:(UIWebView*)theWebView
-{
-    // Black base color for background matches the native apps
-    theWebView.backgroundColor = [UIColor blackColor];
-
-    webViewInfo.hidden = NO;
-    [self performSelector:@selector(hideWebViewInfo) withObject:nil afterDelay:5.0];
-
-    return [super webViewDidFinishLoad:theWebView];
-}
-
-/* Comment out the block below to over-ride */
-
-- (void) webViewDidStartLoad:(UIWebView*)theWebView
-{
-    if(previewerInfo && ![previewerAppDomain isEqualToString:@""] && ![previewerAppKey isEqualToString:@""]) {
-        NSLog(@"previewerAppDomain: %@", previewerAppDomain);
-        NSString *jsSetIdentifier = [[NSString alloc] initWithFormat:@"DOMAIN = '%@'; APP_KEY = '%@'; var BASE_PATH = '/' + APP_KEY;", previewerAppDomain, previewerAppKey];
-        [theWebView stringByEvaluatingJavaScriptFromString:jsSetIdentifier];
-
-        previewerAppDomain = @"";
-        previewerAppKey = @"";
-    }
-
-    return [super webViewDidStartLoad:theWebView];
-}
-
-/*
-- (void) webView:(UIWebView*)theWebView didFailLoadWithError:(NSError*)error
-{
-    return [super webView:theWebView didFailLoadWithError:error];
-}
-
-- (BOOL) webView:(UIWebView*)theWebView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    return [super webView:theWebView shouldStartLoadWithRequest:request navigationType:navigationType];
-}
-
-// CB-12098
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < 90000  
-- (NSUInteger)supportedInterfaceOrientations
-#else  
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-#endif
-{
-    return [super supportedInterfaceOrientations];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
-{
-    return [super shouldAutorotateToInterfaceOrientation:interfaceOrientation];
-}
-
-- (BOOL)shouldAutorotate 
-{
-    return [super shouldAutorotate];
-}
-*/
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
