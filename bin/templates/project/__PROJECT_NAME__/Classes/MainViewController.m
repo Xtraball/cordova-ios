@@ -136,6 +136,8 @@
 
         [self.webView addGestureRecognizer:tap];
 
+        [self performSelector:@selector(hideWebViewInfo) withObject:nil afterDelay:5.0];
+
     }
 }
 
