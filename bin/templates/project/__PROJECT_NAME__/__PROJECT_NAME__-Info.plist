@@ -4,10 +4,10 @@
 <dict>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
+        <key>NSAllowsArbitraryLoads</key>
 		<true/>
-      <key>NSExceptionDomains</key>
-      <dict/>
+        <key>NSExceptionDomains</key>
+        <dict/>
 	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
@@ -69,10 +69,27 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UIRequiresFullScreen</key>
-    <true/>
-    <key>UILaunchImages</key>
+	<key>NSMainNibFile</key>
+	<string></string>
+	<key>NSMainNibFile~ipad</key>
+	<string></string>
+	<key>UISupportedInterfaceOrientations</key>
 	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+        <key>UIRequiresFullScreen</key>
+        <true/>
+    <key>UILaunchImages</key>
+	    <array>
             <dict>
                 <key>UILaunchImageMinimumOSVersion</key>
                 <string>8.0</string>
@@ -173,27 +190,27 @@
                 <key>UILaunchImageSize</key>
                 <string>{768, 1024}</string>
             </dict>
-	</array>
+	    </array>
     <key>UIBackgroundModes</key>
 	<array>
-      <string>audio</string>
-      <string>remote-notification</string>
+        <string>audio</string>
+        <string>remote-notification</string>
 	</array>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string/>
     <key>Previewer</key>
     <dict>
-      <key>Url</key>
-      <dict>
-        <key>url_key</key>
-        <string/>
-        <key>url_domain</key>
-        <string>localhost</string>
-        <key>url_path</key>
-        <string/>
-        <key>url_scheme</key>
-        <string>http</string>
-      </dict>
+        <key>Url</key>
+        <dict>
+            <key>url_key</key>
+            <string/>
+            <key>url_domain</key>
+            <string>localhost</string>
+            <key>url_path</key>
+            <string/>
+            <key>url_scheme</key>
+            <string>http</string>
+        </dict>
     </dict>
     <key>UIMainStoryboardFile</key>
     <string>Previewer</string>

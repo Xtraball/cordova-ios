@@ -22,6 +22,69 @@
 
 Cordova is a static library that enables developers to include the Cordova API in their iOS application projects easily, and also create new Cordova-based iOS application projects through the command-line.
 
+### 4.5.1 (Sep 21, 2017)
+* [CB-13310](https://issues.apache.org/jira/browse/CB-13310) Updated checked-in node_modules
+* [CB-13191](https://issues.apache.org/jira/browse/CB-13191) (ios) Support marketing icon (#337)
+* [CB-12888](https://issues.apache.org/jira/browse/CB-12888) - cordova emulate **iOS** doesn't work in **iOS** 11
+
+### 4.5.0 (Sep 06, 2017)
+* [CB-13247](https://issues.apache.org/jira/browse/CB-13247) updated checked-in node_modules
+* [CB-13212](https://issues.apache.org/jira/browse/CB-13212) - Update `cordova-ios` with new cordova-common that parses new attribute for access tag
+* [CB-13240](https://issues.apache.org/jira/browse/CB-13240) - Update **iOS**-deploy dependency to 1.9.2
+* [CB-12830](https://issues.apache.org/jira/browse/CB-12830) - cordova emulate **iOS** with --target throws undefined error (#332)
+* [CB-13210](https://issues.apache.org/jira/browse/CB-13210) - App Transport Security Key is wrong (#331)
+* [CB-13164](https://issues.apache.org/jira/browse/CB-13164) fixed local require, updated cordova.js (#333)
+* [CB-13222](https://issues.apache.org/jira/browse/CB-13222) - (iOS) Infinite Loop when a "NSURLErrorCancelled -999" is received on didFailLoadWithError (#334)
+* [CB-12937](https://issues.apache.org/jira/browse/CB-12937) - (iOS) added new method handleOpenURLWithApplicationSourceAndAnno… (#321)
+* [CB-13164](https://issues.apache.org/jira/browse/CB-13164) Integrated cordova-plugin-console to build in support for window.console. (#330)
+* [CB-13112](https://issues.apache.org/jira/browse/CB-13112) - <resource-file> should not create a new file reference on each "cordova prepare" (#329)
+* [CB-13093](https://issues.apache.org/jira/browse/CB-13093) (iOS) Infinite looping when stressing navigation (#328)
+* [CB-12966](https://issues.apache.org/jira/browse/CB-12966) (ios) Fix bug by escaping project name in podfile template
+* [CB-12895](https://issues.apache.org/jira/browse/CB-12895) : removed jshint and added eslint
+* [CB-12960](https://issues.apache.org/jira/browse/CB-12960) Run tests on Node 4.x and 6.x This closes #323
+* [CB-12948](https://issues.apache.org/jira/browse/CB-12948) - Add a warning to updateProject for **iOS**
+* [CB-10916](https://issues.apache.org/jira/browse/CB-10916) Support display name for **iOS**
+* [CB-12887](https://issues.apache.org/jira/browse/CB-12887) - cordova run --list does not show virtual devices in **iOS** 11
+* [CB-12762](https://issues.apache.org/jira/browse/CB-12762) : point `package.json` repo items to github mirrors instead of apache repos site
+* [CB-12675](https://issues.apache.org/jira/browse/CB-12675) - Travis xcode 8.3. os-x image fails an e2e test
+* [CB-12869](https://issues.apache.org/jira/browse/CB-12869) - Update bundled **iOS**-sim to 5.0.13
+* [CB-12856](https://issues.apache.org/jira/browse/CB-12856) - Skip CocoaPods check_reqs if on non-darwin (macOS) platform
+* [CB-8980](https://issues.apache.org/jira/browse/CB-8980) Ensure copied resource-files are cleaned
+* [CB-12847](https://issues.apache.org/jira/browse/CB-12847) added `bugs` entry to `package.json`.
+* Updated cordova-common to 2.1.0 and other bundled node_modules
+* Update bundled ios-sim to 6.0.0
+
+### 4.4.0 (Apr 22, 2017)
+* [CB-12009](https://issues.apache.org/jira/browse/CB-12009) - <resource-file> target attribute ignored on iOS when installing a Cordova plugin
+* [CB-12673](https://issues.apache.org/jira/browse/CB-12673) - ios platform does not build on Xcode 8.3.2
+* [CB-12665](https://issues.apache.org/jira/browse/CB-12665) - removing engineStrict as it is no longer supported
+* [CB-8980](https://issues.apache.org/jira/browse/CB-8980) - Adding resource-file element to config.xml for iOS
+* [CB-11895](https://issues.apache.org/jira/browse/CB-11895) - openURL: is deprecated on iOS 10
+* [CB-10026](https://issues.apache.org/jira/browse/CB-10026) - Fix warnings in Objective-C tests
+* [CB-12617](https://issues.apache.org/jira/browse/CB-12617) - added engine strict for users with older node versions
+* [CB-11233](https://issues.apache.org/jira/browse/CB-11233) - Support installing frameworks into "Embedded Binaries" section of the Xcode project
+* [CB-12577](https://issues.apache.org/jira/browse/CB-12577) - Fix module import warnings when using Cordova.framework (Carthage)
+* [CB-12571](https://issues.apache.org/jira/browse/CB-12571) - Podfile gets overwritten and some dependencies disappear.
+* [CB-12050](https://issues.apache.org/jira/browse/CB-12050) - ios: Create shared scheme for framework target, for Carthage support
+* [CB-12384](https://issues.apache.org/jira/browse/CB-12384) - ios: Add Cocoa Touch Framework target for CordovaLib functionality
+* [CB-12309](https://issues.apache.org/jira/browse/CB-12309) - Missing CLI help for --developmentTeam
+* [CB-12405](https://issues.apache.org/jira/browse/CB-12405) - .ipa is uncompressed in preparation for 'run' command during a 'build', resulting in slow builds
+* [CB-12523](https://issues.apache.org/jira/browse/CB-12523) - Remove iOS 8 support
+* [CB-12522](https://issues.apache.org/jira/browse/CB-12522) - Remove node 0.x support in CI
+* [CB-12377](https://issues.apache.org/jira/browse/CB-12377) - Fix bug with updating platform
+* [CB-12473](https://issues.apache.org/jira/browse/CB-12473) - Delete the correct build output folder
+* [CB-12402](https://issues.apache.org/jira/browse/CB-12402) [CB-12206](https://issues.apache.org/jira/browse/CB-12206) - Properly encode app name to generate XML files
+* [CB-12388](https://issues.apache.org/jira/browse/CB-12388) - Fix memory leak due to strong reference
+* [CB-12287](https://issues.apache.org/jira/browse/CB-12287) - Remove hardcoded sim build destination
+* [CB-12018](https://issues.apache.org/jira/browse/CB-12018) - updated pkg.json with jasmine changes to work with jasmine instead of jasmine-node and rebased off of master branch.
+* [CB-12018](https://issues.apache.org/jira/browse/CB-12018) - updated tests to function with jasmine instead of jasmine-node
+* [CB-12341](https://issues.apache.org/jira/browse/CB-12341) - Possible crash in [CDVUserAgentUtil releaseLock:]
+* [CB-12247](https://issues.apache.org/jira/browse/CB-12247) - Symlinking resource files leads to inability to install app on iOS 10
+* [CB-6274](https://issues.apache.org/jira/browse/CB-6274) - Added support for BackgroundColor preference
+* [CB-12098](https://issues.apache.org/jira/browse/CB-12098) - Update supportedInterfaceOrientations return type (removed spaces)
+* [CB-11810](https://issues.apache.org/jira/browse/CB-11810) - (ios) fix unable to load index page from frameworkpath
+* Removed no-longer-working and generally-unused `diagnose_project` script
+
 ### 4.3.1 (Dec 01, 2016)
 
 * [CB-12203](https://issues.apache.org/jira/browse/CB-12203) - Updated checked-in node_modules

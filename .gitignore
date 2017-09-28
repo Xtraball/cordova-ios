@@ -3,12 +3,14 @@
 .*.sw?
 .vscode
 *.cso
+.idea
 tmp
 *.mode1v3
 *.pbxuser
 xcuserdata
 console.log
 node_modules/jshint
+node_modules/eslint
 node_modules/jasmine-node
 node_modules/rewire
 node_modules/istanbul
@@ -19,6 +21,7 @@ node_modules/.bin/color-support
 node_modules/.bin/coveralls
 node_modules/.bin/escodegen
 node_modules/.bin/esgenerate
+node_modules/.bin/eslint
 node_modules/.bin/esparse
 node_modules/.bin/esvalidate
 node_modules/.bin/handlebars
@@ -225,3 +228,4 @@ node_modules/color-support/
 node_modules/fs.realpath/
 node_modules/jasmine-core/
 node_modules/jasmine/
+node_modules/eslint-*
