@@ -159,6 +159,8 @@ function copyTemplateFiles (project_path, project_name, project_template_dir, pa
     shell.sed('-i', /__PROJECT_NAME__/g, project_name_esc, path.join(r, 'Classes', 'AppDelegate.m'));
     shell.sed('-i', /__PROJECT_NAME__/g, project_name_esc, path.join(r, 'Classes', 'MainViewController.h'));
     shell.sed('-i', /__PROJECT_NAME__/g, project_name_esc, path.join(r, 'Classes', 'MainViewController.m'));
+    shell.sed('-i', /__PROJECT_NAME__/g, project_name_esc, path.join(r, 'Classes', 'Constants.h'));
+    shell.sed('-i', /__PROJECT_NAME__/g, project_name_esc, path.join(r, 'Classes', 'Constants.m'));
     shell.sed('-i', /__PROJECT_NAME__/g, project_name_esc, path.join(r, 'main.m'));
     shell.sed('-i', /__PROJECT_NAME__/g, project_name_esc, path.join(r, project_name + '-Info.plist'));
     shell.sed('-i', /__PROJECT_NAME__/g, project_name_esc, path.join(r, project_name + '-Prefix.pch'));
