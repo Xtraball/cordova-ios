@@ -26,7 +26,6 @@
 //
 
 #import "MainViewController.h"
-#import "CDVCommon.h"
 #import "Constants.h"
 
 @implementation MainViewController
