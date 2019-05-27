@@ -20,12 +20,12 @@ module.exports = {
         'scale': '2x',
         'width-class': 'compact',
         'height-class': 'compact',
-        'filename': 'Default@2x~universal~comcom.png'
+        'filename': 'Default@2x~universal~comcom.jpg'
     }, {
         'idiom': 'universal',
         'scale': '2x',
         'width-class': 'compact',
-        'filename': 'Default@2x~universal~comany.png'
+        'filename': 'Default@2x~universal~comany.jpg'
     }, {
         'idiom': 'universal',
         'scale': '2x',
@@ -33,7 +33,7 @@ module.exports = {
     }, {
         'idiom': 'universal',
         'scale': '2x',
-        'filename': 'Default@2x~universal~anyany.png'
+        'filename': 'Default@2x~universal~anyany.jpg'
     }, {
         'idiom': 'universal',
         'scale': '3x',

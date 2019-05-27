@@ -31,7 +31,7 @@ module.exports = {
     }, {
         'idiom': 'universal',
         'scale': '2x',
-        'filename': 'Default@2x~universal~anyany.png'
+        'filename': 'Default@2x~universal~anyany.jpg'
     }, {
         'idiom': 'universal',
         'scale': '3x',

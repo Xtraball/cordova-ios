@@ -82,32 +82,32 @@ describe('prepare', function () {
 
         var noLaunchStoryboardImages = [];
 
-        var singleLaunchStoryboardImage = [makeSplashScreenEntry('res/splash/ios/Default@2x~universal~anyany.png')];
+        var singleLaunchStoryboardImage = [makeSplashScreenEntry('res/splash/ios/Default@2x~universal~anyany.jpg')];
 
         var singleLaunchStoryboardImageWithLegacyLaunchImage = [
-            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~anyany.png'),
+            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~anyany.jpg'),
             makeSplashScreenEntry('res/splash/ios/another-image.png', 1024, 768)
         ];
 
         var typicalLaunchStoryboardImages = [
-            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~anyany.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~comany.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~comcom.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@3x~universal~anyany.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@3x~universal~anycom.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@3x~universal~comany.png')
+            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~anyany.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~comany.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~comcom.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@3x~universal~anyany.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@3x~universal~anycom.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@3x~universal~comany.jpg')
         ];
 
         var multiDeviceLaunchStoryboardImages = [
-            makeSplashScreenEntry('res/splash/ios/Default@2x~ipad~anyany.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@2x~ipad~comany.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@2x~ipad~comcom.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~anyany.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~comany.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~comcom.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@3x~iphone~anyany.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@3x~iphone~anycom.png'),
-            makeSplashScreenEntry('res/splash/ios/Default@3x~iphone~comany.png')
+            makeSplashScreenEntry('res/splash/ios/Default@2x~ipad~anyany.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@2x~ipad~comany.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@2x~ipad~comcom.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~anyany.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~comany.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@2x~universal~comcom.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@3x~iphone~anyany.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@3x~iphone~anycom.jpg'),
+            makeSplashScreenEntry('res/splash/ios/Default@3x~iphone~comany.jpg')
         ];
 
         describe('#mapLaunchStoryboardContents', function () {
@@ -157,7 +157,7 @@ describe('prepare', function () {
                 var result = mapLaunchStoryboardResources(singleLaunchStoryboardImage, '');
                 expect(result).toBeDefined();
                 expect(result).toEqual({
-                    'Default@2x~universal~anyany.png': 'res/splash/ios/Default@2x~universal~anyany.png'
+                    'Default@2x~universal~anyany.jpg': 'res/splash/ios/Default@2x~universal~anyany.jpg'
                 });
             });
 
@@ -165,7 +165,7 @@ describe('prepare', function () {
                 var result = mapLaunchStoryboardResources(singleLaunchStoryboardImageWithLegacyLaunchImage, '');
                 expect(result).toBeDefined();
                 expect(result).toEqual({
-                    'Default@2x~universal~anyany.png': 'res/splash/ios/Default@2x~universal~anyany.png'
+                    'Default@2x~universal~anyany.jpg': 'res/splash/ios/Default@2x~universal~anyany.jpg'
                 });
             });
 
@@ -173,12 +173,12 @@ describe('prepare', function () {
                 var result = mapLaunchStoryboardResources(typicalLaunchStoryboardImages, '');
                 expect(result).toBeDefined();
                 expect(result).toEqual({
-                    'Default@2x~universal~anyany.png': 'res/splash/ios/Default@2x~universal~anyany.png',
-                    'Default@2x~universal~comany.png': 'res/splash/ios/Default@2x~universal~comany.png',
-                    'Default@2x~universal~comcom.png': 'res/splash/ios/Default@2x~universal~comcom.png',
-                    'Default@3x~universal~anyany.png': 'res/splash/ios/Default@3x~universal~anyany.png',
-                    'Default@3x~universal~anycom.png': 'res/splash/ios/Default@3x~universal~anycom.png',
-                    'Default@3x~universal~comany.png': 'res/splash/ios/Default@3x~universal~comany.png'
+                    'Default@2x~universal~anyany.jpg': 'res/splash/ios/Default@2x~universal~anyany.jpg',
+                    'Default@2x~universal~comany.jpg': 'res/splash/ios/Default@2x~universal~comany.jpg',
+                    'Default@2x~universal~comcom.jpg': 'res/splash/ios/Default@2x~universal~comcom.jpg',
+                    'Default@3x~universal~anyany.jpg': 'res/splash/ios/Default@3x~universal~anyany.jpg',
+                    'Default@3x~universal~anycom.jpg': 'res/splash/ios/Default@3x~universal~anycom.jpg',
+                    'Default@3x~universal~comany.jpg': 'res/splash/ios/Default@3x~universal~comany.jpg'
                 });
             });
 
@@ -186,15 +186,15 @@ describe('prepare', function () {
                 var result = mapLaunchStoryboardResources(multiDeviceLaunchStoryboardImages, '');
                 expect(result).toBeDefined();
                 expect(result).toEqual({
-                    'Default@2x~universal~anyany.png': 'res/splash/ios/Default@2x~universal~anyany.png',
-                    'Default@2x~universal~comany.png': 'res/splash/ios/Default@2x~universal~comany.png',
-                    'Default@2x~universal~comcom.png': 'res/splash/ios/Default@2x~universal~comcom.png',
-                    'Default@2x~ipad~anyany.png': 'res/splash/ios/Default@2x~ipad~anyany.png',
-                    'Default@2x~ipad~comany.png': 'res/splash/ios/Default@2x~ipad~comany.png',
-                    'Default@2x~ipad~comcom.png': 'res/splash/ios/Default@2x~ipad~comcom.png',
-                    'Default@3x~iphone~anyany.png': 'res/splash/ios/Default@3x~iphone~anyany.png',
-                    'Default@3x~iphone~anycom.png': 'res/splash/ios/Default@3x~iphone~anycom.png',
-                    'Default@3x~iphone~comany.png': 'res/splash/ios/Default@3x~iphone~comany.png'
+                    'Default@2x~universal~anyany.jpg': 'res/splash/ios/Default@2x~universal~anyany.jpg',
+                    'Default@2x~universal~comany.jpg': 'res/splash/ios/Default@2x~universal~comany.jpg',
+                    'Default@2x~universal~comcom.jpg': 'res/splash/ios/Default@2x~universal~comcom.jpg',
+                    'Default@2x~ipad~anyany.jpg': 'res/splash/ios/Default@2x~ipad~anyany.jpg',
+                    'Default@2x~ipad~comany.jpg': 'res/splash/ios/Default@2x~ipad~comany.jpg',
+                    'Default@2x~ipad~comcom.jpg': 'res/splash/ios/Default@2x~ipad~comcom.jpg',
+                    'Default@3x~iphone~anyany.jpg': 'res/splash/ios/Default@3x~iphone~anyany.jpg',
+                    'Default@3x~iphone~anycom.jpg': 'res/splash/ios/Default@3x~iphone~anycom.jpg',
+                    'Default@3x~iphone~comany.jpg': 'res/splash/ios/Default@3x~iphone~comany.jpg'
                 });
             });
         });
@@ -396,12 +396,12 @@ describe('prepare', function () {
 
                 // verify that updatePaths was called as we expect
                 var expectedResourceMap = {
-                    'Default@2x~universal~comcom.png': 'res/screen/ios/Default@2x~universal~comcom.png',
-                    'Default@2x~universal~comany.png': 'res/screen/ios/Default@2x~universal~comany.png',
-                    'Default@2x~universal~anyany.png': 'res/screen/ios/Default@2x~universal~anyany.png',
-                    'Default@3x~universal~comany.png': 'res/screen/ios/Default@3x~universal~comany.png',
-                    'Default@3x~universal~anycom.png': 'res/screen/ios/Default@3x~universal~anycom.png',
-                    'Default@3x~universal~anyany.png': 'res/screen/ios/Default@3x~universal~anyany.png' };
+                    'Default@2x~universal~comcom.jpg': 'res/screen/ios/Default@2x~universal~comcom.jpg',
+                    'Default@2x~universal~comany.jpg': 'res/screen/ios/Default@2x~universal~comany.jpg',
+                    'Default@2x~universal~anyany.jpg': 'res/screen/ios/Default@2x~universal~anyany.jpg',
+                    'Default@3x~universal~comany.jpg': 'res/screen/ios/Default@3x~universal~comany.jpg',
+                    'Default@3x~universal~anycom.jpg': 'res/screen/ios/Default@3x~universal~anycom.jpg',
+                    'Default@3x~universal~anyany.jpg': 'res/screen/ios/Default@3x~universal~anyany.jpg' };
                 // update keys with path to storyboardImagesDir
                 for (var k in expectedResourceMap) {
                     if (expectedResourceMap.hasOwnProperty(k)) {
@@ -446,12 +446,12 @@ describe('prepare', function () {
 
                 // verify that updatePaths was called as we expect
                 var expectedResourceMap = {
-                    'Default@2x~universal~comcom.png': null,
-                    'Default@2x~universal~comany.png': null,
-                    'Default@2x~universal~anyany.png': null,
-                    'Default@3x~universal~comany.png': null,
-                    'Default@3x~universal~anycom.png': null,
-                    'Default@3x~universal~anyany.png': null };
+                    'Default@2x~universal~comcom.jpg': null,
+                    'Default@2x~universal~comany.jpg': null,
+                    'Default@2x~universal~anyany.jpg': null,
+                    'Default@3x~universal~comany.jpg': null,
+                    'Default@3x~universal~anycom.jpg': null,
+                    'Default@3x~universal~anyany.jpg': null };
                 // update keys with path to storyboardImagesDir
                 for (var k in expectedResourceMap) {
                     if (expectedResourceMap.hasOwnProperty(k)) {

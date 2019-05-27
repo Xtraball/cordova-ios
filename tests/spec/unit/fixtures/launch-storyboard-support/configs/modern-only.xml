@@ -14,12 +14,12 @@
         <preference name="target-device" value="handset" />
         <preference name="deployment-target" value="8.0" />
 
-        <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
-        <splash src="res/screen/ios/Default@2x~universal~comany.png" />
-        <splash src="res/screen/ios/Default@2x~universal~comcom.png" />
-        <splash src="res/screen/ios/Default@3x~universal~anyany.png" />
-        <splash src="res/screen/ios/Default@3x~universal~anycom.png" />
-        <splash src="res/screen/ios/Default@3x~universal~comany.png" />
+        <splash src="res/screen/ios/Default@2x~universal~anyany.jpg" />
+        <splash src="res/screen/ios/Default@2x~universal~comany.jpg" />
+        <splash src="res/screen/ios/Default@2x~universal~comcom.jpg" />
+        <splash src="res/screen/ios/Default@3x~universal~anyany.jpg" />
+        <splash src="res/screen/ios/Default@3x~universal~anycom.jpg" />
+        <splash src="res/screen/ios/Default@3x~universal~comany.jpg" />
     </platform>
 
     <access origin="http://*.apache.org" />

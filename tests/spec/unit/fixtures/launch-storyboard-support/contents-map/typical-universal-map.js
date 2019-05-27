@@ -28,18 +28,18 @@ module.exports = [
         'scale': '2x',
         'width': 'com',
         'height': 'com',
-        'filename': 'Default@2x~universal~comcom.png',
-        'src': 'res/splash/ios/Default@2x~universal~comcom.png',
-        'target': 'Default@2x~universal~comcom.png'
+        'filename': 'Default@2x~universal~comcom.jpg',
+        'src': 'res/splash/ios/Default@2x~universal~comcom.jpg',
+        'target': 'Default@2x~universal~comcom.jpg'
     },
     {
         'idiom': 'universal',
         'scale': '2x',
         'width': 'com',
         'height': 'any',
-        'filename': 'Default@2x~universal~comany.png',
-        'src': 'res/splash/ios/Default@2x~universal~comany.png',
-        'target': 'Default@2x~universal~comany.png'
+        'filename': 'Default@2x~universal~comany.jpg',
+        'src': 'res/splash/ios/Default@2x~universal~comany.jpg',
+        'target': 'Default@2x~universal~comany.jpg'
     },
     {
         'idiom': 'universal',
@@ -52,9 +52,9 @@ module.exports = [
         'scale': '2x',
         'width': 'any',
         'height': 'any',
-        'filename': 'Default@2x~universal~anyany.png',
-        'src': 'res/splash/ios/Default@2x~universal~anyany.png',
-        'target': 'Default@2x~universal~anyany.png'
+        'filename': 'Default@2x~universal~anyany.jpg',
+        'src': 'res/splash/ios/Default@2x~universal~anyany.jpg',
+        'target': 'Default@2x~universal~anyany.jpg'
     },
     {
         'idiom': 'universal',

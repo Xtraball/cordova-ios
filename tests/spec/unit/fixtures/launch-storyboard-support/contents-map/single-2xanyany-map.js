@@ -46,9 +46,9 @@ module.exports = [
         'scale': '2x',
         'width': 'any',
         'height': 'any',
-        'filename': 'Default@2x~universal~anyany.png',
-        'src': 'res/splash/ios/Default@2x~universal~anyany.png',
-        'target': 'Default@2x~universal~anyany.png'
+        'filename': 'Default@2x~universal~anyany.jpg',
+        'src': 'res/splash/ios/Default@2x~universal~anyany.jpg',
+        'target': 'Default@2x~universal~anyany.jpg'
     },
     {
         'idiom': 'universal',
