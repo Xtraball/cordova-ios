@@ -43,7 +43,7 @@ module.exports = {
         'idiom': 'universal',
         'scale': '3x',
         'width-class': 'compact',
-        'filename': 'Default@3x~universal~comany.png'
+        'filename': 'Default@3x~universal~comany.jpg'
     }, {
         'idiom': 'universal',
         'scale': '3x',
